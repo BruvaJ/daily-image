@@ -6,6 +6,8 @@
       {% load static %}
       <!-- TODO: find alternative solution to this hard-cording. Obvious choice is creating
     the file path fully in views.py wanted to use %static -->
-        <img src="/static/images/collection/{{image}}" alt="failed to find">
+      <div class="col-lg-4 col-xs-6">
+        <img class="thumbnail" src="/static/images/collection/{{image}}" alt="failed to find" height=280 width=320 padding-bottom=10px>
+      </div>
     {% endfor %}
   {% endblock %}
