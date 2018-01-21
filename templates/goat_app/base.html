@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title></title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ </head>
+ <body>
+     <nav class="navbar navbar-default navbar-static-top" role="navigation">
+       <div class="container">
+         <div class="navbar-collapse collapse">
+           <!-- TODO: Fix logo position -->
+             <a class="navbar-brand" href="{% url 'goat_app:index' %}"><img src="{% static "images/branding/goat.svg" %}" alt="Brand" height=30 width=30></a>
+             <ul class="nav navbar-nav navbar-left">
+             <li><a class="navbar-link" href="{% url 'goat_app:gallery' %}">Gallery</a></li>
+             </ul>
+             <ul class="nav navbar-nav navbar-right">
+             <li><a class="navbar-link" href="{% url 'goat_app:about' %}">About</a></li>
+             </ul>
+         </div>
+       </div>
+     </nav>
+     <div class="container">
+
+       {% block body_block %}
+         <!-- Extending templates can add content here -->
+       {% endblock %}
+
+     </div>
+ </body>
+</html>
+/
