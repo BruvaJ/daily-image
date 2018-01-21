@@ -2,4 +2,10 @@
 {% extends "goat_app/base.html" %}
   {% block body_block %}
     <h1>gallery</h1>
+    {% for image in images %}
+      {% load static %}
+      <!-- TODO: find alternative solution to this hard-cording. Obvious choice is creating
+    the file path fully in views.py wanted to use %static -->
+        <img src="/static/images/collection/{{image}}" alt="failed to find">
+    {% endfor %}
   {% endblock %}
