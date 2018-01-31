@@ -16,11 +16,14 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "goat_app/media")
+DAILY_IMAGE_DIR = os.path.join(MEDIA_ROOT, "daily_images")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
+# TODO: find way to hide this information
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '71i1@1x@)xj8+acjej3-kjuv6%y=2do)#(p8ys(@l3=%@!k=q&'
 
