@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from goat_app.models import Daily_Image
-from goat_website.settings import MEDIA_ROOT, DAILY_IMAGE_DIR
+from goat_website.settings import DAILY_IMAGE_DIR, BASE_DIR, MEDIA_ROOT
 from goat_app.api_keys import KEYS
 import requests, random, time, os
 
@@ -26,18 +26,18 @@ class Command(BaseCommand):
         +str(page)+"&per_page="+str(items_per_page)).json()['hits'][index]
         return response
 
-    def save_image(image_name, image_data, image_format):
-        with open(os.path.join(DAILY_IMAGE_DIR, image_name+'.jpg'), 'wb') as handler:
+    def save_image(image_name, image_data):
+        with open(os.path.join(DAILY_IMAGE_DIR, image_name), 'wb') as handler:
             handler.write(image_data)
 
-    def pick_image_path(base_dir):
+    def pick_image_name(base_dir, image_format):
         taken_numbers = []
         for file in os.listdir(base_dir):
             taken_numbers.append(int(file.split('.')[0].replace('goat', '')))
         i = 1
         while True:
             if i not in taken_numbers:
-                return os.path.join(DAILY_IMAGE_DIR,'goat'+str(i))
+                return 'goat'+str(i) + '.' + image_format
             else:
                  i += 1
 
@@ -52,9 +52,7 @@ class Command(BaseCommand):
         img.save()
 
 
-
-
-    total_hits =  500#get_total_available(api_request)
+    total_hits =  get_total_available(api_request)
 
     item_number = get_random_item(total_hits)
     page = item_number//items_per_page
@@ -62,15 +60,15 @@ class Command(BaseCommand):
 
     chosen_json = get_json_result(index, items_per_page, page, api_request)
 
-    image_path = pick_image_path(DAILY_IMAGE_DIR)
-    print(image_path)
+    image_format = chosen_json['webformatURL'].split('.')[-1]
+
+    image_name = pick_image_name(DAILY_IMAGE_DIR, image_format)
 
     image = requests.get(chosen_json['webformatURL']).content
-    image_format = chosen_json['webformatURL'].split('.')[1]
-    save_image(image_path, image, image_format)
+    save_image(image_name, image)
 
-    create_daily_image(image_path, chosen_json)
-
+    relative_path = os.path.join(os.path.relpath(DAILY_IMAGE_DIR, MEDIA_ROOT), image_name)
+    create_daily_image(relative_path, chosen_json)
 
     # # TODO: check that response = 200
     # # TODO: how to hide API key and not put on github? environment variable or put in a file w/ git ignore

@@ -11,5 +11,11 @@ class Daily_Image(models.Model):
     pixa_user = models.CharField(null=False, max_length=255)
     image_path = models.ImageField(null=False, upload_to='daily_images', max_length=100, unique=True)
 
+    # TODO:
+    # not yet used. Could be nice alternative to all the different file paths in settings
+    @staticmethod
+    def get_directory():
+        return 'daily_images'
+
     def __str__(self):
-        return self.url
+        return self.image_path.url
