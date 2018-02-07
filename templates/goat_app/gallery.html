@@ -5,8 +5,8 @@
     {% for image in images %}
       {% load static %}
       <div class="col-lg-4 col-xs-6">
-        <img class="thumbnail" src="{{ image.image_path.url }}" alt="failed to find" height=280 width=320 padding-bottom=10px>
-        {{ image.image_path }}
+        <img class="thumbnail" src="{% static image.image_path.url %}" alt="failed to find" height=280 width=320 padding-bottom=10px>
       </div>
     {% endfor %}
+
   {% endblock %}
