@@ -8,7 +8,9 @@
       whilst also sharing with the world some joy through the medium of goats.</p>
       <p>I'd like to invite you to sign up below for my newsletter which provides you with a gotd (goat of the day) every day.</p>
       <p>Enjoy :)</p>
+
       <!-- TODO: connect button to a subscription screen, want this to be same page... therefore jquery etc? can django do this? -->
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Subscribe now</a></p>
-  </div>
+      <a id='subscribe_modal' class="btn btn-lg btn-success" data-toggle="modal" data-target="#subscriptionModal">Click to open Modal</a>
+    {% include "goat_app/subscribe.html" %}
+
   {% endblock %}

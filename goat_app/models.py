@@ -12,4 +12,11 @@ class Daily_Image(models.Model):
     image_path = models.ImageField(null=False, upload_to='daily_images', max_length=100, unique=True)
 
     def __str__(self):
-        return self.url
+        return self.image_path.url
+
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subscription_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.email
