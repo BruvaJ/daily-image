@@ -41,5 +41,5 @@ def validate_email(request):
         data['error_message'] = 'A user with this email already exists.'
     else:
         new_subscriber = Subscriber(email = email)
-        # new_subscriber.save()
+        new_subscriber.save()
     return JsonResponse(data)
