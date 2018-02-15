@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.mail import send_mail
+from django.views.generic import ListView, DetailView
 import os
 from goat_website import settings
 from goat_app.models import Daily_Image, Subscriber
@@ -24,13 +25,28 @@ def surprise_goat(request):
     image = images[random.randrange(0, len(images))]
     return render(request, 'goat_app/surprise_goat.html', context={'image': image})
 
-
 def getGoatImages():
     images = []
     for f in os.listdir(os.path.join(settings.STATIC_DIR, "images/collection/")):
-        print(os.path.join("images/collection/", f))
         images.append(os.path.join("images/collection/", f))
     return images
+
+class ImageList(ListView):
+    model = Daily_Image
+
+
+class ImageDetail(DetailView):
+    model = Daily_Image
+
+    def get_object(self):
+        # Call the superclass
+        object = super().get_object()
+        # Record the last accessed date
+        if(object.first_published_date == Daily_Image.get_latest().first_published_date):
+            object.votable = True
+        # Return the object
+        return object
+
 
 def validate_email(request):
     email = request.GET.get('email', None)

@@ -11,6 +11,9 @@ class Daily_Image(models.Model):
     pixa_user = models.CharField(null=False, max_length=255)
     image_path = models.ImageField(null=False, upload_to='daily_images', max_length=100, unique=True)
 
+    def get_latest():
+        return Daily_Image.objects.latest('first_published_date')
+
     # TODO:
     # not yet used. Could be nice alternative to all the different file paths in settings
     @staticmethod
@@ -19,6 +22,7 @@ class Daily_Image(models.Model):
 
     def __str__(self):
         return self.image_path.url
+
 
 class Subscriber(models.Model):
     email = models.EmailField(unique=True)

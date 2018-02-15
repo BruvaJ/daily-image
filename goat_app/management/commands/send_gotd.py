@@ -21,7 +21,7 @@ class Command(BaseCommand):
     emailList = list(Subscriber.objects.all().only('email').values_list('email', flat=True))
     msg = EmailMultiAlternatives('GOTD', content, 'bruvajohn@gmail.com', to=emailList)
     msg.attach_alternative(content, "text/html")
-    image_path = Daily_Image.objects.latest('first_published_date').image_path.url
+    image_path = Daily_Image.get_latest().image_path.url;
 
     image = MIMEImage(open(os.path.join(STATIC_DIR, image_path), 'rb').read())
     image.add_header('Content-ID', '<{}>'.format('gotd.jpg'))

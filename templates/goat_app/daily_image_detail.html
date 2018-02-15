@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "goat_app/base.html" %}
+  {% block body_block %}
+
+    {% load static %}
+    <div class='jumbotron'>
+    <img class="thumbnail" src="{% static daily_image.image_path.url %}" alt="failed to find" height=100% width=100% padding-bottom=10px>
+    {% if daily_image.votable %}
+    <p>Daily</p>
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+    </button>
+    {% endif %}
+    </div>
+  {% endblock %}
