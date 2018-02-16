@@ -6,13 +6,36 @@
     <div class='jumbotron'>
     <img class="thumbnail" src="{% static daily_image.image_path.url %}" alt="failed to find" height=100% width=100% padding-bottom=10px>
     {% if daily_image.votable %}
-    <p>Daily</p>
-    <button type="button" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-    </button>
-    <button type="button" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-    </button>
+    <div class="">
+      <button type="button" class="btn btn-default btn-lg likebutton">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+      </button>
+      <span id='likemessage'>
+      {% if daily_image.up_votes == 0 %}
+        No likes yet. Be the first to like it! </p>
+      {% else %}
+        <div id='value'>{{daily_image.up_votes}} like(s)!</div>
+      {% endif %}
+    </span>
+    </div>
     {% endif %}
+    <script type="text/javascript">
+      var hasLiked = false
+      // var likebutton = document.getElementByClass('likebutton');
+      // var likemessage = document.getElementByClass('likemessage');
+      $(".likebutton").click(function(){
+        console.log(this)
+        var upvotes = {{daily_image.up_votes}}
+        $(this).children().toggleClass("glyphicon-thumbs-down")
+        if(!hasLiked){
+          $('#likemessage').text(upvotes + 1 + ' like(s)')
+          hasLiked = true
+          }
+        else {
+          $('#likemessage').text(upvotes + ' like(s)')
+          hasLiked = false
+        }
+      })
+    </script>
     </div>
   {% endblock %}
