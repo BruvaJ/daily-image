@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^goat/(?P<pk>\d+)/', views.ImageDetail.as_view(), name='detail'),
     url(r'^about/', views.about, name='about'),
     url(r'^ajax/validate_email/$', views.validate_email, name='validate_email'),
+    url(r'^ajax/goat_vote/$', views.goat_vote, name='goat_vote'),
 ]

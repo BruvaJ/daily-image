@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.core.mail import send_mail
 from django.views.generic import ListView, DetailView
 import os
@@ -59,3 +59,10 @@ def validate_email(request):
         new_subscriber = Subscriber(email = email)
         new_subscriber.save()
     return JsonResponse(data)
+
+def goat_vote(request):
+    has_liked = int(request.GET.get('hasLiked', None))
+    id = request.GET.get('id', None)
+    boolean_has_liked = True if (has_liked == 1) else False
+    Daily_Image.vote(boolean_has_liked, id)
+    return HttpResponse(status=204)

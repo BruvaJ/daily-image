@@ -14,6 +14,18 @@ class Daily_Image(models.Model):
     def get_latest():
         return Daily_Image.objects.latest('first_published_date')
 
+    def vote(has_liked, id):
+        chosen = Daily_Image.objects.get(pk=id)
+        print(has_liked)
+        if(has_liked == True):
+            print('up')
+            chosen.up_votes = chosen.up_votes + 1
+        else:
+            print('down')
+            chosen.up_votes = chosen.up_votes - 1
+        chosen.save()
+        return
+
     # TODO:
     # not yet used. Could be nice alternative to all the different file paths in settings
     @staticmethod

@@ -38,9 +38,6 @@
                 var email = document.getElementById('id_email');
                 var submit = document.getElementById('submit_button')
                 email.setCustomValidity('This email is already taken');
-                // $('#id_email').after('<p>blahblah</p>')
-                // document.getElementById('emailError').style.display = "block";
-                console.log('taken');
                 document.querySelector('#submit_subscription').reportValidity();
               }else{
                 var email = document.getElementById('id_email');

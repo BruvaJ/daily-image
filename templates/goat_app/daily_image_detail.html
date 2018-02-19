@@ -14,7 +14,7 @@
       {% if daily_image.up_votes == 0 %}
         No likes yet. Be the first to like it! </p>
       {% else %}
-        <div id='value'>{{daily_image.up_votes}} like(s)!</div>
+        {{daily_image.up_votes}} like(s)
       {% endif %}
     </span>
     </div>
@@ -24,7 +24,6 @@
       // var likebutton = document.getElementByClass('likebutton');
       // var likemessage = document.getElementByClass('likemessage');
       $(".likebutton").click(function(){
-        console.log(this)
         var upvotes = {{daily_image.up_votes}}
         $(this).children().toggleClass("glyphicon-thumbs-down")
         if(!hasLiked){
@@ -35,6 +34,13 @@
           $('#likemessage').text(upvotes + ' like(s)')
           hasLiked = false
         }
+        $.ajax({
+          url: "{% url 'goat_app:goat_vote' %}",
+          data: {'hasLiked': hasLiked ? 1:0, 'id': "{{ daily_image.id }}"},
+          dataType: 'json',
+          success: function () {
+          }
+        });
       })
     </script>
     </div>
