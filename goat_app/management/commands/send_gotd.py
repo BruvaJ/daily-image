@@ -14,10 +14,8 @@ class Command(BaseCommand):
     help = 'Sends an email to each subscriber on the list'
 
     template = get_template('email.html')
-    context = {'user': 'user', 'other_info': 'info'}
-    content = template.render(context)
-    # if not user.email:
-    #     raise BadHeaderError('No email address given for {0}'.format(user))
+    content = template.render()
+
     emailList = list(Subscriber.objects.all().only('email').values_list('email', flat=True))
     msg = EmailMultiAlternatives('GOTD', content, 'bruvajohn@gmail.com', to=emailList)
     msg.attach_alternative(content, "text/html")
