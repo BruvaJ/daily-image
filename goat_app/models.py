@@ -38,6 +38,7 @@ class Daily_Image(models.Model):
 
 class Subscriber(models.Model):
     email = models.EmailField(unique=True)
+    interest = models.CharField(max_length=10)
     subscription_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

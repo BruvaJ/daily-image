@@ -50,11 +50,14 @@ class ImageDetail(DetailView):
 
 def validate_email(request):
     email = request.GET.get('email', None)
+    interest = request.GET.get('interest', None)
     data = {
         'is_taken': Subscriber.objects.filter(email__iexact=email).exists()
     }
     if data['is_taken']:
         data['error_message'] = 'A user with this email already exists.'
+    elif len(interest) != 1:
+        data['interest_error'] = 'Please enter a single word without punctuation'
     else:
         new_subscriber = Subscriber(email = email)
         new_subscriber.save()

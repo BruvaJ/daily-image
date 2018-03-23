@@ -39,10 +39,15 @@
                 var submit = document.getElementById('submit_button')
                 email.setCustomValidity('This email is already taken');
                 document.querySelector('#submit_subscription').reportValidity();
+              }else if (data.interest_error) {
+                var interest = document.getElementById('id_interest');
+                interest.setCustomValidity(data.interest_error);
               }else{
                 var email = document.getElementById('id_email');
+                var interest = document.getElementById('id_interest');
                 $('subscribe_submit').click()
                 email.setCustomValidity('');
+                interest.setCustomValidity('');
                 $("#id_email").css("border", "green");
                 $("#id_email").css("box-shadow", "0 0 10px green");
                 $('#id_email').prop('disabled', true)
