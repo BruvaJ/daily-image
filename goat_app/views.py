@@ -4,14 +4,15 @@ from django.core.mail import send_mail
 from django.views.generic import ListView, DetailView
 import os
 from goat_website import settings
-from goat_app.models import Daily_Image, Subscriber
-from goat_app.forms import SubscriberForm
+from goat_app.models import Daily_Image
+from accounts.models import Subscriber
+from accounts.forms import UserCreateForm
 import random
 
 # Create your views here.
 def index(request):
-    form = SubscriberForm
-    return render(request, 'goat_app/index.html', context={'form': form})
+    form = UserCreateForm
+    return render(request, 'goat_app/index.html')
 
 def gallery(request):
     # return render(request, 'goat_app/gallery.html', context={'images': getGoatImages()})

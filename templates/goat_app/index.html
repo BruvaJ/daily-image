@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-{% extends "goat_app/base.html" %}
+{% extends "base.html" %}
   {% block body_block %}
   <div class="jumbotron">
     <h1>Hello, world (of photogrpahy)!</h1>
@@ -10,7 +9,6 @@
       <p>Enjoy :)</p>
 
       <!-- TODO: connect button to a subscription screen, want this to be same page... therefore jquery etc? can django do this? -->
-      <a id='subscribe_modal' class="btn btn-lg btn-success" data-toggle="modal" data-target="#subscriptionModal">Subscribe</a>
-    {% include "goat_app/subscribe.html" %}
+      <a class="btn btn-lg btn-primary" href="{% url 'accounts:signup' %}">Subscribe</a>
 
   {% endblock %}

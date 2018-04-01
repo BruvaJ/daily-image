@@ -6,7 +6,8 @@ from django.template import Context
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from email.mime.image import MIMEImage
-from goat_app.models import Daily_Image, Subscriber
+from goat_app.models import Daily_Image
+from goat_app.models import Subscriber
 import os
 
 class Command(BaseCommand):

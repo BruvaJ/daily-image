@@ -19,4 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('goat_app.urls')),
+    url(r"^accounts/", include("accounts.urls", namespace="accounts")),
+    url(r"^accounts/", include("django.contrib.auth.urls")),
 ]
