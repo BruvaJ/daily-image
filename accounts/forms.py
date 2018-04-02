@@ -16,7 +16,7 @@ class UserCreateForm(UserCreationForm):
         student_kwargs = kwargs.copy()
         self.subscriber_form = SubscriberForm(*args, student_kwargs)
         self.fields.update(self.subscriber_form.fields)
-        print('init', kwargs)
+        # print('init', kwargs)
 
     def save(self, *args, **kwargs):
         user = super(UserCreateForm, self).save()

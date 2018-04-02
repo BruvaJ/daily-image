@@ -30,6 +30,12 @@
                <li><a class="navbar-link" href="{% url 'goat_app:surprise_goat' %}">Surprise</a></li>
                </ul>
                <ul class="nav navbar-nav navbar-right">
+                 {% if user.is_authenticated %}
+                  <li><a class="navbar-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+    					   {% else %}
+						      <li><a class="navbar-link" href="{% url 'accounts:login' %}">Log in</a></li>
+						      <li><a class="navbar-link" href="{% url 'accounts:signup' %}">Sign up</a></li>
+    						{% endif %}
                <li><a class="navbar-link" href="{% url 'goat_app:about' %}">About</a></li>
                </ul>
              </div>

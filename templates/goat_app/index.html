@@ -2,13 +2,16 @@
   {% block body_block %}
   <div class="jumbotron">
     <h1>Hello, world (of photogrpahy)!</h1>
-    <p>Welcome to my wonderful world of goats. This website is an
+    <p>Welcome to my wonderful world of goats{% if user.is_authenticated %} {{ user.get_username }}{% endif %}. This website is an
       opportunity for me to practice using django with bootstrap,
       whilst also sharing with the world some joy through the medium of goats and other lovely images.</p>
-      <p>I'd like to invite you to sign up below for my newsletter which provides you with a gotd (goat of the day) every day.</p>
-      <p>Enjoy :)</p>
 
+      {% if not user.is_authenticated %}
+
+      <p>I'd like to invite you to sign up below for my newsletter which provides you with a gotd (goat of the day) every day.</p>
       <!-- TODO: connect button to a subscription screen, want this to be same page... therefore jquery etc? can django do this? -->
       <a class="btn btn-lg btn-primary" href="{% url 'accounts:signup' %}">Subscribe</a>
+      {% endif %}
 
+      <p>Enjoy :)</p>
   {% endblock %}
